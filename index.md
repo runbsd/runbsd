@@ -2,7 +2,7 @@
 This line of operating systems started out life as a series of patches to AT&T
 UNIX which was introduced to the University of Berkeley by Ken Thompson whilst
 on sabbatical in 1977.  From the 1BSD TAPE file included in the [CSRG archive
-CD set](http://www.mckusick.com/csrg/index.html)
+CD set](http://www.mckusick.com/csrg/index.html):
 
     Berkeley UNIX Software Tape
     Jan 16, 1978 TP 800BPI
