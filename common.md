@@ -4,7 +4,7 @@ for the BSDs.  Whether it is the Design & Implementation series which started
 with covering 4.3BSD in 1989 and more recently FreeBSD 10 in the fourth
 instalment of the series, or each projects own set of documentation.
 Documentation is important as it distinguishes intent & implementation as well
-as save a lot of question and answers emails.  FreeBSD has handbooks, NetBSD
+as save a lot of question and answer emails.  FreeBSD has handbooks, NetBSD
 has guides, OpenBSD has FAQs and all projects make their man pages available
 online as web pages. There is even a [teaching course](http://teachbsd.org/)
 based around the [The Design and Implementation of the FreeBSD Operating
@@ -19,6 +19,7 @@ operating system from source. `release(7)` on
 [FreeBSD](https://www.freebsd.org/cgi/man.cgi?query=release), `release(8)` on
 [OpenBSD](http://man.openbsd.org/OpenBSD-current/man8/release.8), `nerelease(7)`
 on [DragonFlyBSD](https://www.dragonflybsd.org/cgi/web-man?command=nrelease)
+cover the release build process for each operating system.
 
 For the purpose of embedding the operating system it may not be desirable to
 build a full blown release. Depending on the choice of variant, either the
