@@ -8,7 +8,7 @@ for additional platforms. Today the project boasts support for CPUs such as
 ARMv8, [RISC-V](http://riscv.org/) and
 [BERI](http://www.cl.cam.ac.uk/research/security/ctsrd/beri/).
 
-FreeBSD is the home to many innovations, such as
+FreeBSD is the home to many innovations, such as:
 
 #### Ports
 Ports is a framework for building software. It abstracts away different build
