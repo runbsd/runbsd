@@ -15,15 +15,17 @@ Ports is a framework for building software. It abstracts away different build
 systems to provide a common workflow to the user, regardless of the software
 being built and installed. This frees the user to request the software they
 desire and for the system to compute dependencies and ensure they are built and
-installed as well.   Developers and contributors create recipes to install
-different pieces of software. These recipes or ports as they are called contain
-such information as where the source code is hosted, which dependencies the
-software requires to build and run, patches to ensure the software integrates
-correctly with the operating system. Ports for each piece of software are stored
-in individual directories of their own, organised in categories of the
-functionality they provide.   For a user to build and install one of these
-packages they would change into the relevant directory & run make install.
-This can be a consuming process depending on the system being built on but binary
-packages are of course offered as standard, allowing this process to be bypassed
-entirely unless desired. While such functionality may be a given on operating
-systems of today, this has been a standard feature since the early 1990s.
+installed as well.   
+Developers and contributors create recipes to install different pieces of
+software. These recipes or ports as they are called contain such information as
+where the source code is hosted, which dependencies the software requires to
+build and run, patches to ensure the software integrates correctly with the
+operating system. Ports for each piece of software are stored in individual
+directories of their own, organised in categories of the functionality they
+provide.   
+For a user to build and install one of these packages they would change into
+the relevant directory & run make install.  This can be a consuming process
+depending on the system being built on but binary packages are of course
+offered as standard, allowing this process to be bypassed entirely unless
+desired. While such functionality may be a given on operating systems of today,
+this has been a standard feature since the early 1990s.
