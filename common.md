@@ -4,11 +4,14 @@ for the BSDs.  Whether it is the Design & Implementation series which started
 with covering 4.3BSD in 1989 and more recently FreeBSD 10 in the fourth
 instalment of the series, or each projects own set of documentation.
 Documentation is important as it distinguishes intent & implementation as well
-as save a lot of question and answer emails.  FreeBSD has handbooks, NetBSD
-has guides, OpenBSD has FAQs and all projects make their man pages available
-online as web pages. There is even a [teaching course](http://teachbsd.org/)
-based around the [The Design and Implementation of the FreeBSD Operating
-System, 2nd
+as save a lot of question and answer emails.  FreeBSD has
+[handbooks](https://www.freebsd.org/docs.html), NetBSD has
+[guides](http://www.netbsd.org/docs/#guides), OpenBSD has
+[FAQs](http://www.openbsd.org/faq/index.html), DragonFly BSD has a
+[handbook](http://www.dragonflybsd.org/docs/handbook/) and all projects make
+their man pages available online as web pages. There is even a [teaching
+course](http://teachbsd.org/) based around the [The Design and Implementation
+of the FreeBSD Operating System, 2nd
 edition](http://www.informit.com/store/design-and-implementation-of-the-freebsd-operating-9780321968975).
 
 ### Frameworks for building embedded images
