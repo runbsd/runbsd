@@ -29,3 +29,13 @@ depending on the system being built on but binary packages are of course
 offered as standard, allowing this process to be bypassed entirely unless
 desired. While such functionality may be a given on operating systems of today,
 this has been a standard feature since the early 1990s.
+
+#### Jails
+The jail mechanism, a form of [operating system level
+virtualisation](https://en.wikipedia.org/wiki/Operating-system-level_virtualization),
+allows partitions to be created on a system where a binary and associated
+dependencies or a full copy of the base OS and
+[more](https://wiki.freebsd.org/VIMAGE/Linux/CentOS55) can run in isolation,
+hence the title jail. Over the years jail has grown new features such as the
+ability to nest jails within each other, creating a [Matryoshka
+doll](https://en.wikipedia.org/wiki/Matryoshka_doll) like effect with jails.
