@@ -1,3 +1,10 @@
+./index.md
+./bsd.md
+./common.md
+./freebsd.md
+./netbsd.md
+./openbsd.md
+./dragonfly.md
 ./docs/bsd.html
 ./docs/common.html
 ./docs/dragonfly.html
@@ -5,4 +12,3 @@
 ./docs/index.html
 ./docs/netbsd.html
 ./docs/openbsd.html
-./docs/sitemap.xml

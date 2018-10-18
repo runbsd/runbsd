@@ -27,6 +27,13 @@ h2 {
   margin-bottom: 60px;
 }
 
+.header__logo {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
 .footer {
   margin-top: 60px;
 }
