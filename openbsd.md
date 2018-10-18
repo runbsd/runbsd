@@ -1,4 +1,5 @@
-### OpenBSD
+# OpenBSD
+
 Forked from NetBSD 1.0, the focus of OpenBSD is security. The source code for
 OpenBSD was made publicly available on 18 October 1995 via anonymous CVS. The
 first release was version 1.2 which shipped in July 1996, followed by the 2.0

@@ -1,0 +1,41 @@
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 10px;
+  font-family: "Noto Sans", sans;
+  font-size: 20px;
+  background: #ffffff;
+  color: #111111;
+}
+
+a:hover:visited,
+a:hover,
+a {
+  color: #cc0000;
+}
+
+a:visited {
+  color: #770011;
+}
+
+h1,
+h2 {
+  margin-top: 60px;
+}
+
+.header {
+  margin-bottom: 60px;
+}
+
+.footer {
+  margin-top: 60px;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+.avatar {
+  height: 60px;
+  width: 60px;
+}
