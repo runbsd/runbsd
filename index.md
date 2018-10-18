@@ -36,7 +36,7 @@ developed.
 
 ## Media kit
 
-Thanks to [@FiLis](https://twitter.com/filis) for the logo.
+Thanks to [@FiLiS](https://twitter.com/FiLiS) for the logo.
 
 <pre>
 

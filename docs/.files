@@ -5,10 +5,9 @@
 ./netbsd.md
 ./openbsd.md
 ./dragonfly.md
-./docs/bsd.html
-./docs/common.html
-./docs/dragonfly.html
-./docs/freebsd.html
-./docs/index.html
-./docs/netbsd.html
-./docs/openbsd.html
+./header.png
+./avatar.png
+./favicon.ico
+./favicon.png
+./logo.png
+./post-receive

@@ -11,11 +11,11 @@ body {
 a:hover:visited,
 a:hover,
 a {
-  color: #cc0000;
+  color: #ee0000;
 }
 
 a:visited {
-  color: #770011;
+  color: #ee4444;
 }
 
 h1,
