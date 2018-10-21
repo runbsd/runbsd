@@ -1,5 +1,3 @@
-# Common themes
-
 ## Documentation
 
 No matter the flavour, documentation is a key part of the development

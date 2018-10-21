@@ -8,6 +8,6 @@ rm -f "$dst/.files"
 rm -rf "$src"
 git clone . "$src"
 
-"/var/www/src/bin/ssg2" "$src" "$dst" 'RUN BSD' 'https://runbsd.eu'
+"/var/www/src/bin/ssg3" "$src" "$dst" 'RUN BSD' 'https://runbsd.info'
 
 hostname > "$dst/hostname"
