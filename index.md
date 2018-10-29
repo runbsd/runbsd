@@ -39,12 +39,10 @@ developed.
 Thanks to [@FiLiS](https://twitter.com/FiLiS) for the logo.
 
 <pre>
-
 <a href="logo.png"><img style="border: 1px solid #888888"
 src="avatar.png"></a>
 
 <a href="favicon.png">favicon  32x32</a>
 <a href="avatar.png">avatar 120x120</a>
 <a href="logo.png">logo 2800x2800</a>
-
 </pre>
