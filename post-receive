@@ -4,10 +4,11 @@ set -e
 dst="/var/www/htdocs/$(basename "$(pwd)" '.git')"
 src="$dst/raw"
 
-rm -f "$dst/.files"
-rm -rf "$src"
+rm -rf "${dst:?}/".*
+rm -rf "${dst:?}/"*
+rm -rf "${src:?}"
 git clone . "$src"
 
-"/var/www/src/bin/ssg3" "$src" "$dst" 'RUN BSD' 'https://runbsd.info'
+"/var/www/bin/ssg3" "$src" "$dst" 'RUN BSD' 'https://runbsd.info' > /dev/null
 
 hostname > "$dst/hostname"
