@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 # DragonFly BSD
 
 Forked from FreeBSD, the focus of DragonFly BSD is scalability &

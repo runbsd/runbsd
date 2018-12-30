@@ -1,0 +1,23 @@
+#!/bin/sh
+
+usage() { echo 'usage: add <date> <nick> <name>'; exit 1; }
+[ -z "$1" ] && { usage; }
+[ -z "$2" ] && { usage; }
+[ -z "$3" ] && { usage; }
+date="$1"
+nick="$2"
+name="$3"
+
+cat<<EOF
+<p><a href="/" alt="avatar" title="home page"><img src="${nick}.jpeg" class="avatar"></a></p>
+
+_people who run BSD ([more?](/people/))_
+
+# ${name} runs BSD
+
+...
+
+_[${date}](/raw/people/${nick}.md)_
+
+[OpenBSD]: https://www.openbsd.org/
+EOF

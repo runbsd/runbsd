@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 # BSD
 
 This line of operating systems started out life as a series of

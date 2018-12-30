@@ -1,0 +1,84 @@
+#!/bin/sh
+[ -z "$1" ] && { echo 'usage: index <file>'; exit 1; }
+file="$1"
+
+line='"(.*)"	(.*)	"(.*)"'
+a='<a title="\3 \1" href="/people/\2.html">'
+img='<img src="/people/\2.jpeg" class="avatar">'
+avas=$(sed -E "s#${line}#${a}${img}</a>#" "$file")
+#list=$(sed -E "s#${line}#${a}\3</a> \&nbsp; #" "$file")
+
+cat<<EOF
+<div class="header">
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
+<p>
+<a href="/bsd.html">BSD</a> &nbsp;
+<a href="/netbsd.html">NetBSD</a> &nbsp;
+<a href="/freebsd.html">FreeBSD</a> &nbsp;
+<a href="/openbsd.html">OpenBSD</a> &nbsp;
+<a href="/dragonfly.html">Dragonfly BSD</a> &nbsp;
+<a href="/common.html">common themes</a> &nbsp;
+</p>
+</div>
+
+<h1>People who run BSD</h1>
+<p>
+${avas}
+</p>
+
+<h2>Berkeley Software Distribution</h2>
+
+<p>This line of operating systems started out life as a series of
+patches to AT&amp;T UNIX which was introduced to the University of
+Berkeley by Ken Thompson whilst on sabbatical in 1977.</p>
+
+<p>The development of BSD is closely tied with that of the internet.
+BSD&#39;s modern variants are some of the oldest communities who have
+collaborated over the internet to develop a software project which
+continues to today. The workflow of the projects has transpired to
+become the standard way of developing open source software on the
+internet, whether it&#39;s
+<a href="https://en.wikipedia.org/wiki/Kernel_Normal_Form">adhering to a style guide</a>,
+<a href="https://en.wikipedia.org/wiki/OpenBSD#Open-source_and_open_documentation">developing with a publicly accessible source repository</a>, or
+<a href="https://en.wikipedia.org/wiki/Hackathon#Origin_and_history">holding a hackathon</a>.</p>
+
+<p>For a newcomer interested in an operating system to run on your
+hardware, it is a great opportunity to be a part of a tech savvy
+community working to evolve an idea started almost 40 years ago.</p>
+
+<p>As a business, each project produces a mature and robust operating
+system that has seen many applications from running on devices such
+as
+<a href="https://en.wikipedia.org/wiki/PlayStation_4_system_software">game consoles</a>,
+<a href="http://undeadly.org/cgi?action=article&amp;sid=20140506132000">mobile phones</a>,
+<a href="http://imgur.com/a/SMVdp">cars</a>,
+<a href="https://en.wikipedia.org/wiki/NetBSD#Examples_of_use">satellites and the international space station</a>.
+Nearly all projects are backed by a non-profit foundation which can
+act as a liaison for businesses and assist with enquiries regarding
+development.</p>
+
+<p>You&#39;ll find the various <a href="bsd.html">BSD&#39;s</a> listed on the side menu in
+chronological order, starting from the <a href="bsd.html">oldest</a> to the
+<a href="dragonfly.html">newest</a>. All but the original BSD project are actively
+developed.</p>
+
+<h2 id="Media%20kit">Media kit</h2>
+
+<p>Thanks to <a href="https://twitter.com/FiLiS">@FiLiS</a> for the logo.</p>
+
+<pre>
+<a href="/logo.png"><img style="border: 1px solid #888888"
+src="/avatar.png"></a>
+
+<a href="/favicon.png">favicon  32x32</a>
+<a href="/avatar.png">avatar 120x120</a>
+<a href="/logo.png">logo 2800x2800</a>
+</pre>
+
+<p>Created by <a href="https://www.sevanjaniyan.co.uk/">Sevan Janiyan</a>.<br>
+Generated with
+<a href="https://www.romanzolotarev.com/ssg.html">ssg</a>
+and hosted on
+<a href="https://openbsd.amsterdam">OpenBSD.Amsterdam</a>.</p>
+EOF

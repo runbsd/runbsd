@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 # NetBSD
 
 NetBSD was the first of the modern variants that is still actively

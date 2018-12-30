@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 # FreeBSD
 
 Forked from the Net/2 & 386BSD code base, 6 months after NetBSD was

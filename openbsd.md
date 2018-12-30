@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 # OpenBSD
 
 Forked from NetBSD 1.0, the focus of OpenBSD is security. The source code for

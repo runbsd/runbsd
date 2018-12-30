@@ -9,6 +9,6 @@ rm -rf "${dst:?}/"*
 rm -rf "${src:?}"
 git clone . "$src"
 
-"/var/www/bin/ssg3" "$src" "$dst" 'RUN BSD' 'https://runbsd.info' > /dev/null
+"/var/www/src/bin/ssg4" "$src" "$dst" 'Run BSD' 'https://runbsd.info' > /dev/null
 
 hostname > "$dst/hostname"

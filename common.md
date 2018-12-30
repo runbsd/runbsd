@@ -1,3 +1,5 @@
+<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+
 ## Documentation
 
 No matter the flavour, documentation is a key part of the development
