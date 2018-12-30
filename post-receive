@@ -1,7 +1,15 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
-dst="/var/www/htdocs/$(basename "$(pwd)" '.git')"
+title='Run BSD'
+url='https://runbsd.info/'
+
+pwd=$(pwd)
+if test -z "${pwd##*.git}"
+then repo="$pwd"
+else repo="$pwd/.git"
+fi
+
+dst="/var/www/htdocs/$(basename "$pwd" '.git')"
 src="$dst/raw"
 
 rm -rf "${dst:?}/".*
@@ -9,6 +17,14 @@ rm -rf "${dst:?}/"*
 rm -rf "${src:?}"
 git clone . "$src"
 
-"/var/www/src/bin/ssg4" "$src" "$dst" 'Run BSD' 'https://runbsd.info' > /dev/null
+"/var/www/src/bin/ssg4" "$src" "$dst" "$title" "$url" > /dev/null
+
+mkdir -p "$dst/src"
+echo "$title" > "$repo/owner"
+echo "$url" > "$repo/description"
+(cd "$dst/src" && stagit "$pwd")
+cp -f "$dst/src/log.html" "$dst/src/index.html"
+cp -f "$dst/stagit/"* "$dst/src/"
+>&2 echo "[stagit] $(grep -c '"commit' "$dst/src/log.html") commits"
 
 hostname > "$dst/hostname"

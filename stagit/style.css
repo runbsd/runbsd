@@ -1,0 +1,102 @@
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: monospace;
+}
+
+h1,
+h2 {
+  font-size: 1em;
+  margin: 0;
+}
+
+a {
+  color: #ee0000;
+  text-decoration: none;
+}
+a:visited {
+  color: #ee4444;
+}
+a:hover {
+  color: #ee4444;
+  text-decoration: underline;
+}
+
+#blob a {
+  color: #777777;
+  padding: 0 5px 0 0;
+}
+
+#blob a:hover {
+  text-decoration: none;
+}
+
+table thead td {
+  font-weight: bold;
+}
+
+table td {
+  padding: 0 0.4em;
+}
+
+#content table td {
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+#branches tr:hover td,
+#tags tr:hover td,
+#index tr:hover td,
+#log tr:hover td,
+#files tr:hover td {
+  background-color: #eeeeee;
+}
+
+#index tr td:nth-child(2),
+#tags tr td:nth-child(3),
+#branches tr td:nth-child(3),
+#log tr td:nth-child(2) {
+  white-space: normal;
+}
+
+td.num {
+  text-align: right;
+}
+
+hr {
+  border: 0;
+  height: 3px;
+}
+
+#content hr {
+  display: none;
+}
+
+pre {
+  font-family: monospace;
+}
+
+pre a.h {
+  color: #888888;
+}
+
+span.i,
+pre a.i {
+  color: #24292e;
+  background-color: #e6ffed;
+}
+
+span.d,
+pre a.d {
+  color: #24292e;
+  background-color: #ffeef0;
+}
+
+pre a.h:hover,
+pre a.i:hover,
+pre a.d:hover {
+  text-decoration: none;
+}

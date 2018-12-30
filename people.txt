@@ -1,3 +1,4 @@
+"30 Dec 2018"	fr0xk	"Nikolai Lvovich"
 "28 Oct 2018"	neerajpal	"Neeraj Pal"
 "14 Oct 2018"	int9h	"Manuel Wildauer"
 "09 Oct 2018"	pikkabird	"Hans Solo"
