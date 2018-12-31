@@ -11,13 +11,12 @@ name="$3"
 cat<<EOF
 <p><a href="/" alt="avatar" title="home page"><img src="${nick}.jpeg" class="avatar"></a></p>
 
-_people who run BSD ([more?](/people/))_
-
 # ${name} runs BSD
 
 ...
 
 _[${date}](/raw/people/${nick}.md)_
 
+[FreeBSD]: https://www.freebsd.org/
 [OpenBSD]: https://www.openbsd.org/
 EOF
