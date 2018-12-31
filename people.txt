@@ -1,3 +1,4 @@
+"31 Dec 2018"	ogmaconnect	"Tom Smyth"
 "31 Dec 2018"	banym	"Dominik Zajac"
 "30 Dec 2018"	fr0xk	"Nikolai Lvovich"
 "28 Oct 2018"	neerajpal	"Neeraj Pal"
