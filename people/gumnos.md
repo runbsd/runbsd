@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="gumnos.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="gumnos.jpeg" class="w3"></a></p>
 
 # Tim Chase runs BSD
 

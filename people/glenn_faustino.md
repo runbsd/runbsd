@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="glenn_faustino.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="glenn_faustino.jpeg" class="w3"></a></p>
 
 # Glenn Faustino runs OpenBSD
 

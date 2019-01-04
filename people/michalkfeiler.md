@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="michalkfeiler.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="michalkfeiler.jpeg" class="w3"></a></p>
 
 # Micha&#x142; K. Feiler runs BSD
 

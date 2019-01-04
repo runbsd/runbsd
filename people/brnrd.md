@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="brnrd.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="brnrd.jpeg" class="w3"></a></p>
 
 # Bernard Spil runs FreeBSD 
 

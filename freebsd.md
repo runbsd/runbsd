@@ -1,4 +1,4 @@
-<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+<a href="/" title="home"><img src="/header.png" class="w3"></a>
 
 # FreeBSD
 

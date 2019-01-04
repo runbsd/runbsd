@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="devnexen.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="devnexen.jpeg" class="w3"></a></p>
 
 # David Carlier runs BSD
 

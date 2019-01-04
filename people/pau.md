@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="pau.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="pau.jpeg" class="w3"></a></p>
 
 # Pau Amaro Seoane runs OpenBSD
 

@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="mischapeters.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="mischapeters.jpeg" class="w3"></a></p>
 
 # Mischa Peters runs BSD
 

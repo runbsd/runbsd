@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="videlft.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="videlft.jpeg" class="w3"></a></p>
 
 # Vincent Delft runs BSD
 

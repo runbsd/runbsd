@@ -9,7 +9,7 @@ nick="$2"
 name="$3"
 
 cat<<EOF
-<p><a href="/" alt="avatar" title="home page"><img src="${nick}.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="${nick}.jpeg" class="w3"></a></p>
 
 # ${name} runs BSD
 

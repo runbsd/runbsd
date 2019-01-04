@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="mgiunti.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="mgiunti.jpeg" class="w3"></a></p>
 
 # Maurizio Giunti runs FreeBSD
 

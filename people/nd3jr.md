@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="nd3jr.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="nd3jr.jpeg" class="w3"></a></p>
 
 # Dave Vollenweider runs NetBSD
 

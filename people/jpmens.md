@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="jpmens.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="jpmens.jpeg" class="w3"></a></p>
 
 # Jan-Piet Mens runs BSD
 

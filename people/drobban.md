@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="drobban.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="drobban.jpeg" class="w3"></a></p>
 
 # David Bern runs OpenBSD
 

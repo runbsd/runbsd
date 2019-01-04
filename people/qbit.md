@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="qbit.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="qbit.jpeg" class="w3"></a></p>
 
 # Aaron Bieber runs OpenBSD
 

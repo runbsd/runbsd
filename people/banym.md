@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="banym.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="banym.jpeg" class="w3"></a></p>
 
 # Dominik Zajac runs BSD
 

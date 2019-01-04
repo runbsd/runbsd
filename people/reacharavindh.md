@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="reacharavindh.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="reacharavindh.jpeg" class="w3"></a></p>
 
 # Aravindh Sampath runs OpenBSD
 

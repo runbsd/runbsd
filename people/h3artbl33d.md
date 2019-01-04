@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="h3artbl33d.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="h3artbl33d.jpeg" class="w3"></a></p>
 
 # h3artbl33d runs OpenBSD
 

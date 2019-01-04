@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="filis.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="filis.jpeg" class="w3"></a></p>
 
 # Philip Jocks runs FreeBSD
 

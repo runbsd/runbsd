@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="fd0.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="fd0.jpeg" class="w3"></a></p>
 
 # fd0 runs BSD
 

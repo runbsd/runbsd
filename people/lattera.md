@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="lattera.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="lattera.jpeg" class="w3"></a></p>
 
 # Shawn Webb runs HardenedBSD
 

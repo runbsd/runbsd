@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="mulander.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="mulander.jpeg" class="w3"></a></p>
 
 # Adam Wo&#x142;k runs OpenBSD
 

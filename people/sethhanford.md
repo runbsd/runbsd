@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="sethhanford.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="sethhanford.jpeg" class="w3"></a></p>
 
 # Seth Hanford runs OpenBSD 
 

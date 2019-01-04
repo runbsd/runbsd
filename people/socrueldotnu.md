@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="socrueldotnu.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="socrueldotnu.jpeg" class="w3"></a></p>
 
 # Lars Witterbrood runs FreeBSD
 

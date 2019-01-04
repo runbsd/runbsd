@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="fbettag.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="fbettag.jpeg" class="w3"></a></p>
 
 # Franz Bettag runs BSD
 

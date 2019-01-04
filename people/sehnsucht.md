@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="sehnsucht.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="sehnsucht.jpeg" class="w3"></a></p>
 
 # Sehnsucht runs BSD
 

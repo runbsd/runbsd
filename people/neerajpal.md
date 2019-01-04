@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="neerajpal.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="neerajpal.jpeg" class="w3"></a></p>
 
 # Neeraj Pal runs BSD
 

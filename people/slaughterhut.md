@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="slaughterhut.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="slaughterhut.jpeg" class="w3"></a></p>
 
 # Jason Barbier runs BSD 
 

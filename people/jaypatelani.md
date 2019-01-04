@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="jaypatelani.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="jaypatelani.jpeg" class="w3"></a></p>
 
 # Jay Patel runs BSD
 

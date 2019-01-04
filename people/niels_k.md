@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="niels_k.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="niels_k.jpeg" class="w3"></a></p>
 
 # Niels Kobsch&auml;tzki runs BSD
 

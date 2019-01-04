@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="solobsd.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="solobsd.jpeg" class="w3"></a></p>
 
 # Guillermo Garc&iacute;a Rojas runs BSD
 

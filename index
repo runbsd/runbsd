@@ -4,15 +4,14 @@ file="$1"
 
 line='"(.*)"	(.*)	"(.*)"'
 a='<a title="\3 \1" href="/people/\2.html">'
-img='<img src="/people/\2.jpeg" class="avatar">'
+img='<img src="/people/\2.jpeg" class="w3">'
 avas=$(sed -E "s#${line}#${a}${img}</a>#" "$file")
 #list=$(sed -E "s#${line}#${a}\3</a> \&nbsp; #" "$file")
 
 cat<<EOF
-<div class="header">
-<p><a href="/" title="home"><img src="/header.png" class="header__logo"></a></p>
+<p><a href="/"><img src="/header.png" class="w3" title="runbsd.info"></a></p>
 
-<p>
+<p class="f6">
 <a href="/bsd.html">BSD</a> &nbsp;
 <a href="/netbsd.html">NetBSD</a> &nbsp;
 <a href="/freebsd.html">FreeBSD</a> &nbsp;
@@ -20,7 +19,6 @@ cat<<EOF
 <a href="/dragonfly.html">Dragonfly BSD</a> &nbsp;
 <a href="/common.html">common themes</a> &nbsp;
 </p>
-</div>
 
 <h1>People who run BSD</h1>
 <p>
@@ -68,8 +66,7 @@ developed.</p>
 <p>Thanks to <a href="https://twitter.com/FiLiS">@FiLiS</a> for the logo.</p>
 
 <pre>
-<a href="/logo.png"><img style="border: 1px solid #888888"
-src="/avatar.png"></a>
+<a href="/logo.png"><img src="/avatar.png"></a>
 
 <a href="/favicon.png">favicon  32x32</a>
 <a href="/avatar.png">avatar 120x120</a>

@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="segnale007.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="segnale007.jpeg" class="w3"></a></p>
 
 # Pietro Sammarco runs BSD
 

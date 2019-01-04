@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="joancatala.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="joancatala.jpeg" class="w3"></a></p>
 
 # Joan Catal&agrave; Pi&ntilde;on runs BSD
 

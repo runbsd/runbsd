@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="anthk.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="anthk.jpeg" class="w3"></a></p>
 
 # Ander runs OpenBSD
 

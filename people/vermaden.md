@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="vermaden.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="vermaden.jpeg" class="w3"></a></p>
 
 # Slawomir Wojciech Wojtczak (vermaden) runs FreeBSD
 

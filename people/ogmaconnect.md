@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="ogmaconnect.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="ogmaconnect.jpeg" class="w3"></a></p>
 
 # Tom Smyth runs BSD
 

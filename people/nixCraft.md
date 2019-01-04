@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="nixCraft.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="nixCraft.jpeg" class="w3"></a></p>
 
 # Vivek Gite runs FreeBSD
 

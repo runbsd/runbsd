@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="fr0xk.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="fr0xk.jpeg" class="w3"></a></p>
 
 # Nikolai Lvovich runs BSD
 

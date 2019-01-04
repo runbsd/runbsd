@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="jovica.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="jovica.jpeg" class="w3"></a></p>
 
 # Jovica Ilic wants to try OpenBSD
 

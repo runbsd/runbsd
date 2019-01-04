@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="romanzolotarev.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="romanzolotarev.jpeg" class="w3"></a></p>
 
 # Roman Zolotarev runs OpenBSD
 

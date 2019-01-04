@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="sinclairtarget.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="sinclairtarget.jpeg" class="w3"></a></p>
 
 # Sinclair Target runs BSD
 

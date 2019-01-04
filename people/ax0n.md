@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="ax0n.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="ax0n.jpeg" class="w3"></a></p>
 
 # Noah Axon runs OpenBSD
 

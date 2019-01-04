@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="anler.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="anler.jpeg" class="w3"></a></p>
 
 # Anler Hern&#225;ndez Peral runs OpenBSD
 

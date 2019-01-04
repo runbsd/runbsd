@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="bflueckiger.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="bflueckiger.jpeg" class="w3"></a></p>
 
 # Bruno Fl&uuml;ckiger runs OpenBSD
 

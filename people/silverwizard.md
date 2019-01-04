@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="silverwizard.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="silverwizard.jpeg" class="w3"></a></p>
 
 # Sean Howard runs BSD
 

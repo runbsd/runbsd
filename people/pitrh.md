@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="pitrh.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="pitrh.jpeg" class="w3"></a></p>
 
 # Peter Hansteen runs BSD
 

@@ -1,4 +1,4 @@
-<p><a href="/" alt="avatar" title="home page"><img src="sivers.jpeg" class="avatar"></a></p>
+<p><a href="/" alt="avatar" title="home page"><img src="sivers.jpeg" class="w3"></a></p>
 
 # Derek Sivers runs OpenBSD
 
