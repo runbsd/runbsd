@@ -17,6 +17,7 @@ cat<<EOF
 <a href="/freebsd.html">FreeBSD</a> &nbsp;
 <a href="/openbsd.html">OpenBSD</a> &nbsp;
 <a href="/dragonfly.html">Dragonfly BSD</a> &nbsp;
+<a href="/hardenedbsd.html">HardenedBSD</a> &nbsp;
 <a href="/common.html">common themes</a> &nbsp;
 </p>
 
@@ -24,6 +25,8 @@ cat<<EOF
 <p>
 ${avas}
 </p>
+
+<p><a href="/people/">Share your story</a></p>
 
 <h2>Berkeley Software Distribution</h2>
 

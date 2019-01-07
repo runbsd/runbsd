@@ -12,8 +12,7 @@ fi
 dst="/var/www/htdocs/$(basename "$pwd" '.git')"
 src="$dst/raw"
 
-rm -rf "${dst:?}/".*
-rm -rf "${dst:?}/"*
+rm -rf "${dst:?}/.files"
 rm -rf "${src:?}"
 git clone . "$src"
 
