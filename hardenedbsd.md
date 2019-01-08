@@ -2,7 +2,7 @@
 
 # HardenedBSD
 
-HardenedBSD is a derivative of FreeBSD, officially founded in 2014,
+[HardenedBSD] is a derivative of FreeBSD, officially founded in 2014,
 that implements exploit mitigations and security hardening
 technologies. The primary goal of HardenedBSD is to perform a
 clean-room re-implementation of the grsecurity patchset for Linux to
@@ -44,3 +44,5 @@ HardenedBSD has successfully implemented the following features:
 - Non-Cross-DSO CFI in base
 - Non-Cross-DSO CFI available in ports
 - Retpoline applied to base and ports
+
+[HardenedBSD]: https://hardenedbsd.org/
