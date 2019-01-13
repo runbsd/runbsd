@@ -4,12 +4,11 @@
 
 Hi!
 
-I am Nikolai from Ukraine.
-
-I work as a soil researcher, and part time school teacher in my
-hometown. Besides, I am a university student, pursuing post graduation
-in Mathematics currently. I used to be a shitty gamer, messed with
-digital audio, I still bang my head with Ibanez RGD 2127z.
+I am from Ukraine. I work as a soil researcher, and part time school
+teacher in my hometown. Besides, I am a university student, pursuing
+post graduation in Mathematics currently. I used to be a shitty
+gamer, messed with digital audio, I still bang my head with Ibanez
+RGD 2127z.
 
 ## Linux Period
 
@@ -24,7 +23,7 @@ the only OS broken, I needed to do a fresh install of it. Honestly,
 I never installed an OS before, so I decided to do this time, ended
 up installing Ubuntu 12.04 LTS. It took me few a bit time to figure
 out that I screwed my data of whole hard drive during installation
-as I chose "Use the whole disk for Ubuntu!".
+as I chose "Use the whole disk for Ubuntu".
 
 That's the hell of my UX experience with Ubuntu. And since then,
 understood what it likes to be a member of GNU/GPL church, anti
@@ -34,11 +33,9 @@ socialism in technology myself.
 
 When I realized, I have spent enough time on this, decided to stick
 to something stable. I stayed in Debian since version 7 to Debian
-9 release, but something always bugged me, debian 9 was completely
-strange for me.  so I started to keep scratching my hipster head
-within new cool kinds of stuff vs stability. I even worked with
-Debian Project as a [Wiki
-Maintainer](https://wiki.debian.org/Nikolai%20Lvovich).
+9 release, but something always bugged me, Debian 9 was completely
+strange for me. So I started to keep scratching my hipster head
+within new cool kinds of stuff vs stability.
 
 ## BSD Period
 
@@ -55,7 +52,7 @@ system (not systemd, or SysVinit, etc, etc).
 
 But...
 
-The OpenBSD reddit community "r/openbsd" helped me a lot. I able
+The OpenBSD reddit community _r/openbsd_ helped me a lot. I able
 to get familiar with OpenBSD tools and userland, learned basic
 system administration for casual desktop use cases. OpenBSD Clang
 was really helpful at teaching me common mistakes while I was
@@ -78,35 +75,48 @@ install).
 - I always needed a dirty backup solution. I have been using
 Clonezilla, fsarchiver in Linux, but It was very time-consuming.
 ZFS can be used to work around here. I tried btrfs, and I failed
-to understand the concept of subvolume, and practically taking
-snapshot/rollbacks. Snappy on btrfs works in a way that makes me
-go nuts.
+to understand the concept of subvolume. Snappy on btrfs works in a
+way that makes me go nuts.
 
 - Clang+LLVM, obviously, my go to. Autocomplete with company inside
-Emacs works great.
+Emacs works great. With Clang, I can mix the compiler front-end
+with a targeted back-end and end up with highly portable and efficient
+compiler.  Clang can perform static analysis of my code, and lets
+me write tools that give information about a program. Static analysis
+is a technique whereby the program is read and 'understood' to the
+point where obvious bugs are automatically detected, such as dead
+code, memory leaks, double-frees, bad pointer references, and other
+such conditions.
 
-- BSD license. Yes... I am sure, GPLv2/v3 both are good licenses,
-but the world doesn't work that way now. Right? Besides, as Neil
-says, "What is more important is that more people run our *BSD code
-than we have control of what other people can do with it!"
+- BSD license. It's so free you can make it not free.  I'm in no
+way against the GPL, GPLv2/v3 both are good licenses, but I think
+that's not practical. Besides, as Neil says, "What is more important
+that more people run our *BSD code than we have control of what
+other people can do with it". I prefer the license philosophy of
+BSD license over GPL license. To me, free means do pretty much
+whatever you want with the code. It's so free you can make it not
+free like apple did.  Practically it probably has no impact on me,
+but I prefer it on principle and was one of the reasons I chose to
+use FreeBSD over Linux.
 
-So, I decided to go with FreeBSD. I started with FreeBSD 11.0, now
-running FreeBSD 12. I use a Window manager, called bspwm, which is
-based upon binary tree-node desgin in mind.
-
+So, I decided to go with FreeBSD. I started with FreeBSD 11.0,
+currently running FreeBSD 12.  I use a Window manager, called bspwm,
+which is based upon binary tree design in mind. However, userland
+changes over time.
 
 [<img src="fr0xk-desktop.png" class="w-100">](fr0xk-desktop.png)
 _My desktop_
 
-I have no plan to go back into Linux, till FreeBSD go really nuts.
-And I don't believe that's going to happen with a very well engineered
-Operating System. I also encourage my students to try out FreeBSD
-or OpenBSD with various boot environments.
+My experience with FreeBSD on the Desktop is polarizing... i.e.
+when it works well, it's _fantastic_, way ahead of any Linux distro.
+Great drivers' stability, no bullshit with audio, 3D graphics works
+great, etc. Really good. But _only_ if it works... If hardware
+doesn't fit inside a fairly narrow box (e.g. Nvidia Optimus), things
+fail horribly. I still encourage people to try out FreeBSD or OpenBSD
+with various boot environments.
 
 So this is my story of Unix, Linux, and BSD. What's yours? I am
-eager to hear...
-
-You can find me on [Twitter](https://twitter.com/fr0xk).
+eager to hear.
 
 _[03 Jan 2019](/raw/people/fr0xk.md)_
 
