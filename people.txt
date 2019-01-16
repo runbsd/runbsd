@@ -1,3 +1,4 @@
+"15 Jan 2019"	dethronedemperor	"Jim Abercromby"
 "12 Jan 2019"	khorben	"Pierre Pronchery"
 "03 Jan 2019"	fr0xk	"Nikolai Lvovich"
 "31 Dec 2018"	ogmaconnect	"Tom Smyth"
