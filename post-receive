@@ -16,6 +16,9 @@ rm -rf "${dst:?}/.files"
 rm -rf "${src:?}"
 git clone . "$src"
 
+"$src/index" "$src/people.txt" > "$src/index.html"
+>&2 echo "[index] $(wc -l < "$src/people.txt" | tr -d ' ') people"
+
 "/var/www/src/bin/ssg4" "$src" "$dst" "$title" "$url" > /dev/null
 
 mkdir -p "$dst/src"
