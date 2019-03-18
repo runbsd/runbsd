@@ -1,32 +1,35 @@
 #!/bin/sh -e
 
 title='Run BSD'
-url='https://runbsd.info/'
+url='https://runbsd.info'
 
-pwd=$(pwd)
-if test -z "${pwd##*.git}"
-then repo="$pwd"
-else repo="$pwd/.git"
+if test -z "${PWD##*.git}"
+then repo="$PWD"
+else repo="$PWD/.git"
 fi
 
-dst="/var/www/htdocs/$(basename "$pwd" '.git')"
-src="$dst/raw"
+dst="/var/www/htdocs/$(basename "$PWD" '.git')"
+raw="$dst/raw"
+src="$dst/src"
 
 rm -rf "${dst:?}/.files"
+rm -rf "${raw:?}"
 rm -rf "${src:?}"
-git clone . "$src"
+git clone "$repo" "$raw"
+(cd "$raw/.git" && git update-server-info)
 
-"$src/index" "$src/people.txt" > "$src/index.html"
->&2 echo "[index] $(wc -l < "$src/people.txt" | tr -d ' ') people"
+"$raw/index" "$raw/people.txt" > "$raw/index.html"
+>&2 echo "[index] $(wc -l < "$raw/people.txt" | tr -d ' ') people"
 
-"/var/www/src/bin/ssg4" "$src" "$dst" "$title" "$url" > /dev/null
+"/var/www/src/bin/ssg4" "$raw" "$dst" "$title" "$url" > /dev/null
 
-mkdir -p "$dst/src"
-echo "$title" > "$repo/owner"
-echo "$url" > "$repo/description"
-(cd "$dst/src" && stagit "$pwd")
-cp -f "$dst/src/log.html" "$dst/src/index.html"
-cp -f "$dst/stagit/"* "$dst/src/"
->&2 echo "[stagit] $(grep -c '"commit' "$dst/src/log.html") commits"
+mkdir -p "$src"
+echo "${title}" > "$repo/owner"
+echo "${url##*//}" > "$repo/description"
+echo "${url}/raw/.git" > "$repo/url"
+(cd "$src" && stagit "$repo")
+cp -f "$src/log.html" "$src/index.html"
+cp -f "$dst/stagit/"* "$src/"
+>&2 echo "[stagit] $(grep -c '"commit' "$src/log.html") commits"
 
 hostname > "$dst/hostname"
