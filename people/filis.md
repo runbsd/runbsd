@@ -1,10 +1,10 @@
 <p><a href="/" alt="avatar" title="home page"><img src="filis.jpeg" class="w3"></a></p>
 
-# Philip Jocks runs FreeBSD
+# FiLiS runs FreeBSD
 
-My name is Philip Jocks, I'm a sysadmin-by-accident since about
-1998. I co-founded [netzkommune.de] in 2000 and now we mostly
-specialize in managed hosting and consulting.
+I'm a sysadmin-by-accident since about 1998. I co-founded
+[netzkommune.de] in 2000 and now we mostly specialize in managed
+hosting and consulting.
 
 I kinda stumbled into the whole Internet business pretty much after
 high school, while working part time at a dotcom-startup in 1998.
