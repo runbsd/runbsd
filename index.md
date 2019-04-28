@@ -10,6 +10,7 @@
 <a href="/hardenedbsd.html">HardenedBSD</a>
 </span><br>
 <a href="/people/">People</a><br>
+<a href="/orgs/">Organizations</a><br>
 <a href="/confs/">Conferences</a><br>
 <a href="/videos/">Videos</a><br>
 <a href="/wild/">Logo</a><br>
