@@ -8,8 +8,7 @@ img='<img src="/people/\2.jpeg" class="w3">'
 avas=$(sed -E "s#${line}#${a}${img}</a>#" "$file")
 #list=$(sed -E "s#${line}#${a}\3</a> \&nbsp; #" "$file")
 
-cat<<EOF
-<p><a href="/"><img src="/header.png" class="w3" title="runbsd.info"></a></p>
+echo '<p><a href="/"><img src="/header-white.png" class="w3" title="runbsd.info"></a></p>
 
 <p class="f6">
 <a href="/bsd.html">BSD</a> &nbsp;
@@ -23,7 +22,7 @@ cat<<EOF
 
 <h1>People who run BSD</h1>
 <p>
-${avas}
+'"${avas}"'
 </p>
 
 <p><a href="/people/">Share your story</a></p>
@@ -73,9 +72,12 @@ developed.</p>
 <pre>
 <a href="/logo.png"><img src="/avatar.png"></a>
 
-<a href="/favicon.png">favicon 32x32</a>
-<a href="/avatar.png">avatar 120x120</a>
-<a href="/logo.png">logo 2800x2800</a>
+<a href="/favicon.png">favicon PNG 32x32</a>
+<a href="/avatar.png">avatar PNG 120x120</a>
+<a href="/logo.png">logo PNG black 1000x1000</a>
+<a href="/logo-white.png">logo white PNG 1000x1000</a>
+<a href="/logo.png">logo black SVG 1000x1000</a>
+<a href="/logo-white.png">logo white SVG 1000x1000</a>
 </pre>
 
 <p>Created by <a href="https://www.sevanjaniyan.co.uk/">Sevan Janiyan</a>.<br>
@@ -83,4 +85,4 @@ Generated with
 <a href="https://www.romanzolotarev.com/ssg.html">ssg</a>
 and hosted on
 <a href="https://openbsd.amsterdam">OpenBSD.Amsterdam</a>.</p>
-EOF
+'
