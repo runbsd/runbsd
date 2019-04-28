@@ -18,9 +18,6 @@ rm -rf "${src:?}"
 git clone "$repo" "$raw"
 (cd "$raw/.git" && git update-server-info)
 
-"$raw/index" "$raw/people.txt" > "$raw/index.html"
->&2 echo "[index] $(wc -l < "$raw/people.txt" | tr -d ' ') people"
-
 "/var/www/src/bin/ssg4" "$raw" "$dst" "$title" "$url" > /dev/null
 
 mkdir -p "$src"

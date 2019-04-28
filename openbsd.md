@@ -1,4 +1,4 @@
-<a href="/" title="home"><img src="/header.png" class="w3"></a>
+<a href="/" title="home"><img src="/header-white.png" class="w3"></a>
 
 # OpenBSD
 

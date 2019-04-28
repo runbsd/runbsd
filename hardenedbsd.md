@@ -1,4 +1,4 @@
-<a href="/" title="home"><img src="/header.png" class="w3"></a>
+<a href="/" title="home"><img src="/header-white.png" class="w3"></a>
 
 # HardenedBSD
 
@@ -21,8 +21,6 @@ strongest form of ASLR in any of the BSDs. Since then, HardenedBSD has
 moved on to implementing other exploit mitigations and hardening
 technologies. OPNsense, an open source firewall based on FreeBSD,
 incorporated HardenedBSD's ASLR implementation in 2016.
-
-## Features
 
 HardenedBSD has successfully implemented the following features:
 
