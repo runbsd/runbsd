@@ -9,7 +9,7 @@ li { padding: .125rem 0; }
 p img { width: 100%; }
 pre { font-size: 15px; overflow-x: auto; color: #333; }
 a { background-color: transparent; }
-input, a, body, code, div, form, h1, h2, h3, html, li, ol, p, pre, ul { box-sizing: border-box; }
+textarea, input, a, body, code, div, form, h1, h2, h3, html, li, ol, p, pre, ul { box-sizing: border-box; }
 img { border-style: none; }
 
 .footnotes { font-size: .75rem; }
