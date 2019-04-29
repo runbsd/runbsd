@@ -110,11 +110,14 @@ reading! Here are more references:
 [Project goals](https://www.openbsd.org/goals.html)<br>
 [Download instructions](https://www.openbsd.org/faq/faq4.html#Download)<br>
 [Official FAQ](https://www.openbsd.org/faq/index.html)<br>
-[My first OpenBSD impressions from 2015](https://t.co/WauardwfIg)
+[My first OpenBSD impressions from 2015](https://cfenollosa.com/blog/openbsd-from-a-veteran-linux-user-perspective.html)
+
+You can find me on [Twitter].
 
 _[29 Apr 2019](/raw/people/cfenollosa.md)_
 
 [OpenBSD]: https://www.openbsd.org/
+[Twitter]: https://twitter.com/cfenollosa
 
 ---
 
