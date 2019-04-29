@@ -12,6 +12,10 @@ a { background-color: transparent; }
 input, a, body, code, div, form, h1, h2, h3, html, li, ol, p, pre, ul { box-sizing: border-box; }
 img { border-style: none; }
 
+.footnotes { font-size: .75rem; }
+.footnotes ol { padding: .75rem; }
+.footnotes li { padding: 0; }
+
 .b--black { border-color: #000; }
 .ba { border-width: 1px; border-style: solid; }
 .bg-black { background-color: #000; }
