@@ -8,9 +8,12 @@
 <a href="/netbsd.html">NetBSD</a>
 <a href="/dragonfly.html">DragonFly&nbsp;BSD</a>
 <a href="/hardenedbsd.html">HardenedBSD</a>
-</span><br>
+</span>
+
 <a href="/people/">People</a><br>
 <a href="/orgs/">Organizations</a><br>
 <a href="/confs/">Conferences</a><br>
 <a href="/videos/">Videos</a><br>
 <a href="/wild/">Logo</a><br>
+
+<a href="/sticker/"><b>Request a sticker</b></a>
