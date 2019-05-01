@@ -48,8 +48,11 @@ img { border-style: none; }
 .w5 { max-width: 16rem; }
 .white { color: #fff; }
 
-.f7 { font-size: .75rem; }
+.lh-title, h2, h3, pre { line-height: 1.25; }
+.ni { text-indent: -.5rem; }
+.f3 { font-size: 1.5rem; }
 .f6 { font-size: .875rem; }
+.f7 { font-size: .75rem; }
 @media screen and (min-width: 30em) {
   .f4-ns, h1 { font-size: 1.25rem; }
   .f5-ns, h2 { font-size: 1rem; }
