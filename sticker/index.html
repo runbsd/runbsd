@@ -8,8 +8,8 @@
 <input type="hidden" name="form_subject" value="Request for RunBSD stickers">
 <input type="hidden" name="form_pre_message" value="From https://runbsd.info/sticker/">
 <input type="hidden" name="form_redirect" value="https://runbsd.info/sticker/thx.html">
-<input type="hidden" name="form_fields" value="email, name, street, city, zip, country">
-<input type="hidden" name="form_additional_fields" value="email, name, street, street2, city, zip, country, message">
+<input type="hidden" name="form_fields" value="email, name, street, city, zip, state, country">
+<input type="hidden" name="form_additional_fields" value="email, name, street, street2, city, zip, state, country, message">
 
 <div class="cf center">
 <div class="fl w-100 w-50-m pr2-m w-50-l pr2-l">
@@ -35,8 +35,10 @@ BSD of your choice.</p>
 <input class="ba b--black pa2 mb2 w-100" id="street2" name="street2">
 <label class="db" for="city">City</label>
 <input required="required" class="ba b--black pa2 mb2 w-100" id="city" name="city" placeholder="London">
-<label class="db" for="zip">ZIP</label>
+<label class="db" for="zip">ZIP or postal code</label>
 <input required="required" class="ba b--black pa2 mb2 w-100" id="zip" name="zip" placeholder="SE1 7AD">
+<label class="db" for="state">State</label>
+<input required="required" class="ba b--black pa2 mb2 w-100" id="state" name="state" placeholder="">
 <label class="db" for="country">Country</label>
 
 <select required="required" class="ba b--black bg-white pa2 mb2 w-100" id="country" name="country">
