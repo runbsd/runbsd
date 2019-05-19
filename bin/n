@@ -1,0 +1,556 @@
+#!/bin/sh -e
+#
+# https://www.romanzolotarev.com/bin/n
+# Copyright 2018-2019 Roman Zolotarev <hi@romanzolotarev.com>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+
+main() {
+	BASE_URL='newsletter'
+	: "${PAGES:=/htdocs/runbsd}"
+	: "${DB:=/db/runbsd}"
+	: "${ROOT:=}"
+	HEADER='/htdocs/runbsd/raw/_header.html'
+	FOOTER='/htdocs/runbsd/raw/_footer.html'
+
+	URI=${REQUEST_URI##/$BASE_URL}
+	case "$REQUEST_METHOD$URI" in
+		GET/?setup) 			setup;;
+		GET/*?log_out*)			log_out;;
+		POST/?send_magic_link) 		send_magic_link;;
+		GET/*?opt_in) 			opt_in;;
+		GET/?wait_for_magic_link*) 	wait_for_magic_link;;
+		GET/*?opt_out) 			opt_out;;
+		GET/?opt_out_email=*)		opt_out_email;;
+		GET/?magic=*) 			verify_magic_link;;
+		GET/*) 				render_page;;
+		*) 				full_stop 'Wat?';;
+	esac
+}
+
+
+##############################################################################
+
+log_out() {
+	m_id=$(get_cookie 'm_id')
+	s_key=$(get_cookie 's_key')
+
+	f="$DB/members/$m_id/sessions/$s_key"
+	test -f "$f" && rm "$f"
+
+	http303 "${REQUEST_URI%%\?*}" \
+'Content-Type: text/html; charset=utf-8
+Set-Cookie: m_id=; Path=/; Secure; HttpOnly
+Set-Cookie: s_key=; Path=/; Secure; HttpOnly'
+}
+
+
+verify_magic_link() {
+	magic=$(get_value "$QUERY_STRING" 'magic')
+	test -n "$magic" || full_stop 'This magic link is broken'
+	f="$DB/tokens/n-$magic"
+	test -f "$f" || full_stop 'This magic link is expired'
+	e=$(cat "$f")
+	test -n "$e" || full_stop 'Email is missing'
+
+	rm "$f"
+
+	e_hash=$(echo "$e" | sha256)
+	m_id=$(get_member_id "$e_hash")
+	d="$(date +%s)"
+
+	if test -n "$m_id"
+	then
+		f_n="$DB/members/$m_id/newsletter"
+		test -f "$f_n" || make_file "$f_n" "$d"
+	else
+		m_id=$(random_str 20)
+		f_n="$DB/members/$m_id/newsletter"
+		make_file "$DB/members/$m_id/created_at" "$d"
+		make_file "$DB/members/$m_id/email" "$e"
+		make_file "$DB/members/$m_id/emails/$e_hash" "$e"
+		make_file "$f_n" "$d"
+	fi
+	s_key=$(create_session "$m_id")
+	http303 '/'"$BASE_URL"'/' \
+'Content-Type: text/html; charset=utf-8
+Set-Cookie: m_id='"$m_id"'; Path=/; Secure; HttpOnly
+Set-Cookie: s_key='"$s_key"'; Path=/; Secure; HttpOnly
+Set-Cookie: key_a=; Path=/; Secure; HttpOnly
+Set-Cookie: e_hash=; Path=/; Secure; HttpOnly'
+}
+
+
+create_session() {
+	m_id="$1"
+	s_key=$(random_str 20)
+	make_file "$DB/members/$m_id/sessions/$s_key"
+	echo "$s_key"
+}
+
+
+wait_for_magic_link() {
+	e=$(get_value "$QUERY_STRING" 'email')
+	m_id=$(get_cookie 'm_id')
+	s_key=$(get_cookie 's_key')
+	f="$DB/members/$m_id/sessions/$s_key"
+
+	test -f "$f" && http303 "/$BASE_URL/"
+
+	http200_wrapped '
+<div class="pv3 mt4 dark-gray">
+<p>
+Sending a magic link to you in a minute.<br>
+Please <b>check your mailbox</b>.</p>
+
+<pre class="f5 mt5">
+From: hi@romanzolotarev.com
+Subject: <em>[RunBSD] Confirm subscription</em>
+To: <em>'"$e"'</em>
+
+...
+</pre>
+<p class="f7">The link will expire in an hour. Didn'\''t get an email?
+<a href="/'"$BASE_URL"'/">Try again</a></p>
+</div>
+'
+}
+
+
+send_magic_link() {
+	query=$(read_query_string_post) || full_stop 'Invalid request'
+	e=$(get_value "$query" 'email' | tr '[:upper:]' '[:lower:]')
+	e_hash=$(echo "$e" | sha256)
+	e_e=$(encode_value "$e")
+	magic=$(random_str 20)
+
+	make_file "$DB/tokens/n-$magic" "$e"
+	make_file "$DB/mail/n-$e_hash" 'To: '"$e"'
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Subject: [RunBSD] Confirm subscription
+
+Hello,
+
+you are about to subscribe to our newsletter,
+please open this link to continue:
+
+'"https://$SERVER_NAME/$BASE_URL/?magic=$magic"'
+
+--
+
+The link will expire in an hour. Sent to: '"$e"
+
+	http303 "/$BASE_URL/?wait_for_magic_link&email=$e_e"
+}
+
+
+opt_out_email() {
+	e=$(get_value "$QUERY_STRING" 'opt_out_email')
+
+	test -n "$e" ||
+	full_stop "$e is not subscribed"
+
+	e_hash=$(echo "$e" | sha256)
+	m_id=$(get_member_id "$e_hash")
+
+	test -n "$m_id" ||
+	full_stop "$e is not subscribed"
+
+	f_n="$DB/members/$m_id/newsletter"
+	test -f "$f_n" ||
+	full_stop "$e is not subscribed"
+
+	rm "$f_n"
+	http200_wrapped '
+<h1>Unsubscribed</h1>
+<p>'"$e"' has been unsubscribed for the newsletter.</p>
+<p class="f7">
+<a href="/contact.html">Let us know</a> if I can help you.</p>
+'
+}
+
+
+opt_out() {
+	m_id=$(get_cookie 'm_id')
+	s_key=$(get_cookie 's_key')
+	test -f "$DB/members/$m_id/sessions/$s_key" ||
+	full_stop 'You are not logged in'
+
+	f_n="$DB/members/$m_id/newsletter"
+	test -f "$f_n" && rm "$f_n"
+	http303 "${REQUEST_URI%%\?*}"
+}
+
+
+opt_in() {
+	m_id=$(get_cookie 'm_id')
+	s_key=$(get_cookie 's_key')
+	test -f "$DB/members/$m_id/sessions/$s_key" ||
+	full_stop 'You are not logged in'
+
+	f_n="$DB/members/$m_id/newsletter"
+	test -f "$f_n" || make_file "$f_n" "$(date +%s)"
+	http303 "${REQUEST_URI%%\?*}"
+}
+
+
+render_page() {
+	p_uri="${PAGES}${REQUEST_URI%%\?*}"
+	if test "${p_uri%%/}" = "$p_uri"
+	then f_page="$p_uri"
+	else f_page="${p_uri}index.html"
+	fi
+	test -f "$f_page"	|| http404
+
+	# logged in && opted in && no email
+	# => set_fill_email_form
+
+        ######################################################################
+	#
+	# logged out
+	# => opt_in_email_form
+	#
+	# logged in && opted in
+	# => opt_out_form
+	#
+	# logged in && opted out && no email
+	# => set_opt_in_form
+	#
+	# logged in && opted out
+	# => set_opt_in_form
+
+	m_id=$(get_cookie 'm_id')
+	s_key=$(get_cookie 's_key')
+	f_m="$DB/members/$m_id/sessions/$s_key"
+	test -f "$f_m"		|| opt_in_email_form "$f_page"
+
+	f_email="$DB/members/$m_id/email"
+	email=$(cat "$f_email")
+	test -n "$email"	|| http500 fill_email_form
+
+	set_user_profile_link "$email"
+
+	f_n="$DB/members/$m_id/newsletter"
+	if test -f "$f_n"
+	then
+		d=$(date -j -r "$(cat "$f_n")" '+%e %b %Y at %H:%M:%S UTC')
+		opt_out_form "$f_page" "$email" "$d"
+	else opt_in_form "$f_page" "$email"
+	fi
+
+}
+
+
+##############################################################################
+
+
+set_user_profile_link() {
+	e="$1"
+	export USER_PROFILE_LINK='
+<div class="f7 mt2">'"$e"' <a href="/'"$BASE_URL"'/?log_out">Log out</a></div>
+'
+}
+
+opt_out_form() {
+	f="$1"
+	e="$2"
+	d="$3"
+	export SUBSCRIPTION_FORM='
+<p class="f7 mt4"><span class="f3">&#x1F44C</span><br>
+Thanks for subscribing to our newsletter.<br>
+Expect updates few times a year sent to <b title="Subscribed on '$d'">'"$e"'</b>.</p>
+<p><a href="?opt_out" class="outline link mw-100 dib mb4 pv1 ph2 b ba black
+bg-near-white b--black hover-black">Unsubscribe</a></p>
+'
+	http200 "$(render_template < "$f")"
+}
+
+opt_in_form() {
+	f="$1"
+	e="$2"
+	export SUBSCRIPTION_FORM='
+<p class="mt4"><span class="f3">&#x1F4E8;</span><br>
+You are not subscribed at the moment.<br>
+Want to get an important updates few times a year to <b>'"$e"'</b>?<br>
+<p><a href="?opt_in" class="outline link mw-100 dib mb4 pv2 ph2 b ba white
+bg-vltr b--dark-gray hover-black hover-bg-light-yellow">Subscribe</a></p>
+'
+	http200 "$(render_template < "$f")"
+}
+
+
+opt_in_email_form() {
+	f="$1"
+	export SUBSCRIPTION_FORM='
+<p class="mt4"><span class="f3">&#x1F4E8;</span><br>
+Want to get BSD related updates few times a year?<br>
+<form class="mb4" method="post" action="/'"$BASE_URL"'/?send_magic_link">
+<input
+	class="outline mw-100 w5 pv2 ph2 ba mb2 mr1 b--black"
+	required="required"
+	name="email"
+	type="email"
+	placeholder="email@example.com">
+<button
+	class="outline mw-100 dib pv2 ph2 b ba white bg-black b--dark-gray
+hover-black hover-bg-light-yellow"
+	type="submit">Subscribe</button><br>
+</form>
+'
+	http200 "$(render_template < "$f")"
+}
+
+
+##############################################################################
+
+
+get_member_id() {
+	e_hash="$1"
+	d="$DB/members"
+	test -d "$d" || { echo; return; }
+	f=$(find "$d" -name "$e_hash" -path '*/emails/*' -type f | head -1)
+	m="${f##$d/}"
+	echo "${m%%/*}"
+}
+
+
+random_str() {
+	jot -rcs '' "$1" 97 122
+}
+
+
+encode_value() {
+	test -n "$1" || { echo; return; }
+	echo "$1" | awk '
+	BEGIN {
+		a = ""
+		for (n = 0; n < 256; n++)
+		pack[sprintf("%c", n)] = sprintf("%%%02x", n) } {
+		sline = ""
+		slen = length($0)
+		for (n = 1; n <= slen; n++) {
+			char = substr($0, n, 1)
+			if ( char !~ /^[[:alnum:]_]$/ ) char = pack[char]
+			sline = sline char
+		}
+		a = a ( a ? "%0a" : "" ) sline
+	}
+	END { print a }'
+}
+
+
+get_value() {
+	# h/t Devin Teske
+	test -n "$1" || { echo; return; }
+	x="${1##*$2=}"
+	test "$x" = "$1" && { echo; return; }
+	# shellcheck disable=1004
+	echo "${x%%&*}" | awk '
+	BEGIN { for (n = 0; n < 256; n++) chr[n] = sprintf("%c",n) } {
+		t = $0
+		a = ""
+		gsub(/\+/, " ", t)
+		while( match(t, /%[[:xdigit:]][[:xdigit:]]/) ) {
+			a = a substr(t, 1, RSTART-1)\
+			chr[ sprintf("%u", "0x" substr(t, RSTART+1, 2))]
+			t = substr(t, RSTART+RLENGTH)
+		}
+		a = a t
+		gsub(/</, "\\&lt;",a)
+		gsub(/>/,"\\&gt;",a)
+		print a
+	}'
+}
+
+
+read_query_string_post() {
+	test -n "$CONTENT_LENGTH" || full_stop 'Invalid content'
+	dd bs=1 count="$CONTENT_LENGTH" status=none
+}
+
+
+make_file() {
+	mkdir -p "${1%/*}"
+	chmod 0770 "${1%/*}"
+	echo "$2" > "$1"
+	chmod 0660 "$1"
+}
+
+
+render_template() {
+	# h/t Devin Teske
+	awk '
+	BEGIN {
+		w = "[a-zA-Z_][a-zA-Z0-9_]*"
+		var = sprintf("\\$(%s|{%s})", w, w)
+	} {
+		str = ""
+		tail = $0
+		while (match(tail, var)) {
+			head = substr(tail, 1, RSTART - 1)
+			repl = substr(tail, RSTART, RLENGTH)
+			tail = substr(tail, RSTART + RLENGTH)
+			if ((match(head, /\\+/) ? RLENGTH + 1 : 1) % 2 == 1) {
+				sub(/^\$/, "", repl)
+				gsub(/(^{|}$)/, "", repl)
+				repl = ENVIRON[repl]
+			}
+			str = str head repl
+		}
+		str = str tail
+		print str
+	}'
+}
+
+
+get_cookie() {
+	c="${HTTP_COOKIE##*$1=}"
+	test -z "$c" ||
+	test "$HTTP_COOKIE" = "$c" &&
+	echo '' && return
+	echo "${c%%;*}"
+}
+
+
+full_stop() {
+	err="$1"
+	fb='/contact.html'
+	u="${REQUEST_URI%%\?*}"
+	http200_wrapped '<h1>Oops...</h1><p>'"$err"'</p>
+<p class="f7">Something went wrong, please <a href="'"$fb"'">let us know</a> or
+<a href="'"$u"'">try again a bit later</a>.</p>'
+}
+
+http500() {
+	echo 'Status: 500 Internal Server Error'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo
+	echo "<pre>$*</pre>"
+	exit 1
+}
+
+http404() {
+	echo 'Status: 404 Not Found'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo
+	cat "$HEADER"
+	echo "<h1>Oops...</h1><p>/$BASE_URL$URI not found</p>"
+	cat "$FOOTER"
+	exit 0
+}
+
+http303() {
+	echo 'Status: 303 See Other'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo "Location: $1"
+	test -n "$2" && echo "$2"
+	echo
+	exit 0
+}
+
+http200() {
+	echo 'Status: 200 OK'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo
+	echo "$1"
+	exit 0
+}
+
+http200_wrapped() {
+	echo 'Status: 200 OK'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo
+	cat "$HEADER"
+	echo "$1"
+	cat "$FOOTER"
+	exit 0
+}
+
+
+setup() {
+	errs=$(
+		setup_test_deps
+		test -r "$HEADER" || echo "HEADER: $HEADER: not a file"
+		test -r "$FOOTER" || echo "FOOTER: $FOOTER: not a file"
+		test -d "$DB" || echo "$DB not a dir"
+	)
+	test -z "$errs" || http500 "$errs\\nFAILED"
+	echo 'Status: 200 OK'
+	echo 'Content-Type: text/html; charset=utf-8'
+	echo
+	echo '<pre>PASS</pre>'
+	exit 0
+}
+
+setup_test_deps() {
+	dirs=''
+
+	echo '
+/etc/resolv.conf
+/etc/ssl/cert.pem
+
+/bin/cat
+/bin/chmod
+/bin/date
+/bin/dd
+/bin/mkdir
+/bin/rm
+/bin/sh
+/bin/sha256
+/usr/bin/awk
+/usr/bin/b64encode
+/usr/bin/cut
+/usr/bin/find
+/usr/bin/grep
+/usr/bin/head
+/usr/bin/jot
+/usr/bin/printf
+/usr/bin/sed
+/usr/bin/tail
+/usr/bin/tr
+/usr/bin/wc
+
+/usr/lib/libc.so.92.5
+/usr/lib/libcrypto.so.44.1
+/usr/lib/libm.so.10.1
+/usr/lib/libpthread.so.25.1
+/usr/lib/libssl.so.46.1
+/usr/lib/libutil.so.13.0
+/usr/lib/libz.so.5.0
+/usr/libexec/ld.so
+/usr/local/lib/libnghttp2.so.0.14
+' |
+	while read -r f
+	do
+		test -n "$f" || continue
+		d=${f%/*}
+		if test "${dirs%%:$d}" = "$dirs" &&
+		test "$d" != '/usr/local/lib'
+		then
+			dirs="$dirs:$d" && test -d "${ROOT}$d" ||
+			echo "mkdir -p /var/www$d"
+		fi
+		test "${f##/usr/local/lib/}" = "$f" &&
+		x="$f" || x="/usr/lib${f##/usr/local/lib}"
+		test -f "${ROOT}$x" || echo "cp $f /var/www$x"
+	done
+}
+
+
+
+##############################################################################
+
+main

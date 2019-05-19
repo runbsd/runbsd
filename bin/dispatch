@@ -1,0 +1,196 @@
+#!/bin/sh
+
+main () {
+	DB='/var/www/db/runbsd'
+	test -d "$DB" || fail "$DB: not found"
+	EXP_TIME='3600'
+	FROM='hi@romanzolotarev.com'
+	BASE_URL='https://runbsd.info/newsletter'
+	NAME='RunBSD'
+	TIME_FMT='+%Y-%m-%d %H:%M:%S'
+	TODAY=$(date +%Y-%m-%d)
+
+	queue_newsletters
+	dispatch_mail
+	remove_expired_tokens
+}
+
+
+##########################################################################
+
+
+queue_newsletters() {
+	f_subs="$DB/newsletters/$TODAY/subscribers"
+	f_sent="$DB/newsletters/$TODAY/sent"
+	d_m="$DB/mail"
+
+	if test -f "$f_subs"
+	then
+		if test -w "$f_subs"
+		then sort -u "$f_subs" -o "$f_subs"
+		else fail "can't write $f_subs"
+		fi
+	else return
+	fi
+
+	if test -f "$f_sent"
+	then
+		if test -w "$f_sent"
+		then sort -u "$f_sent" -o "$f_sent"
+		else fail "can't write $f_sent"
+		fi
+		recipients=$(comm -3 "$f_subs" "$f_sent")
+	else
+		touch "$f_sent"
+		chmod 0660 "$f_sent"
+		doas chown www:db "$f_sent"
+		recipients=$(sort -u "$f_subs")
+	fi
+
+	if test -n "$recipients"
+	then
+		if ! test -d "$d_m"
+		then
+			mkdir -p "$d_m"
+			chmod 0770 "$d_m"
+			doas chown www:db "$d_m"
+		fi
+
+		>&2 printf '[dispatch] %s newsletters ' "$(date "$TIME_FMT")"
+		echo "$recipients" | while read -r to
+		do
+			test -n "$to" || continue
+			grep -q "$to" "$f_sent" && continue
+			render_newsletter "$to" > "$d_m/nn-$(echo "$to" | sha256)"
+			echo "$to" >> "$f_sent"
+		done
+		>&2 printf '%s of %s\n' \
+		"$(wc -l < "$f_sent" | tr -d ' ')" \
+		"$(wc -l < "$f_subs" | tr -d ' ')"
+	fi
+}
+
+
+random_str() {
+	jot -rcs '' 20 97 122
+}
+
+
+render_newsletter() {
+	f_subj="$DB/newsletters/$TODAY/subject"
+	f_html="$DB/newsletters/$TODAY/newsletter.html"
+	f_txt="$DB/newsletters/$TODAY/newsletter.txt"
+
+	to="$1"
+	u="$BASE_URL/?opt_out_email=$(encode_value "$to")"
+
+	boundary="$(random_str)"
+
+	echo 'To: '"$to"'
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="'"$boundary"'"
+Subject: '"$(cat "$f_subj")"'
+
+--'"$boundary"'
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+'"$(cat "$f_txt")"'
+
+--
+
+You are receiving this because you have subscribed at runbsd.info.
+Sent to '"$to"'
+Unsubscribe: '"$u"'
+
+--'"$boundary"'
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html { color: #333; padding: 1rem; }
+body { font-family: "Noto Serif", Georgia, Times, Serif; max-width: 32rem; }
+pre, code { font-family: Consolas, Monaco, monospace; }
+a { color: #204fd5; }
+hr { border: 0; margin-top: 2rem; }
+h1, h2 { margin-top: 1rem; }
+li { padding: .125rem 0; }
+</style>
+
+'"$(cat "$f_html")"'
+
+<p style="font-size: .75rem; color: #888; margin-top: 3rem;">
+RunBSD<br>
+You are receiving this because you have subscribed at runbsd.info.
+Sent to '"$to"'<br>
+<a href="'"$u"'">Unsubscribe</a>
+</p>
+
+--'"$boundary"'--
+'
+}
+
+
+dispatch_mail() {
+	dir="$DB/mail"
+	if test -d "$dir"
+	then
+		echo "[dispatch] $(date "$TIME_FMT") mail"
+		find "$dir" -type f | head -n 10 |
+		while read -r m
+		do
+			sendmail -t -F "$NAME" -f "$FROM" < "$m" || continue
+			to=$(head -n 1 "$m" | cut -d' ' -f2-)
+			>&2 echo "$m: $to"
+			rm "$m"
+		done
+	fi
+}
+
+
+remove_expired_tokens() {
+	dir="$DB/tokens"
+	if test -d "$dir"
+	then
+		echo "[dispatch] $(date "$TIME_FMT") tokens"
+		find "$dir" \
+			-type f \
+			-cmin "+$(( EXP_TIME / 60 ))" \
+			-print -delete
+	fi
+}
+
+
+encode_value() {
+	test -n "$1" || { echo; return; }
+	echo "$1" | awk '
+	BEGIN {
+		a = ""
+		for (n = 0; n < 256; n++)
+		pack[sprintf("%c", n)] = sprintf("%%%02x", n) } {
+		sline = ""
+		slen = length($0)
+		for (n = 1; n <= slen; n++) {
+			char = substr($0, n, 1)
+			if ( char !~ /^[[:alnum:]_]$/ ) char = pack[char]
+			sline = sline char
+		}
+		a = a ( a ? "%0a" : "" ) sline
+	}
+	END { print a }'
+}
+
+
+##########################################################################
+
+
+fail() {
+	>&2 echo "$1"
+	exit 1
+}
+
+main
