@@ -18,7 +18,8 @@ efforts brought me to the [TorBSD Diversity Project
 (TDP)](https://torbsd.org/2016/12/17/welcome-aboard-vinicius.html) and
 made me a [Core Team member of the Tor
 Project](https://www.torproject.org/about/corepeople.html.en#egypcio) as
-well.
+well. I'm also behind the reborn of the [Brazilian OpenBSD Users Group
+(OpenBSD-BR)](https://openbsd-br.org).
 
 Why not [NetBSD] or [OpenBSD]?  What about [DragonflyBSD]?  Today it's
 still not easy to describe exactly what brought me to [FreeBSD] in one
@@ -46,11 +47,12 @@ fun](https://www.bsdcan.org/2016/schedule/events/658.en.html). I
 remember that I presented an use case for a cross-compiling setup
 running FreeBSD and Poudriere together with QEMU support during one of
 the 'Compilers 101' classes at the tech institute where I graduated from
-(Instituto Federal de Educa&#231;&#227;o, Ci&#234;ncia e Tecnologia do
-Cear&#225; --- IFCE) --- there I also talked about KAME/IPv6 on FreeBSD
-and recommend the net/sysadmins to use it to handle routing and packet
-filtering. One of the official FreeBSD mirrors in Brazil was running
-thanks to IFCE --- it was [the only one in Brazil serving the /snapshots
+([Instituto Federal de Educa&#231;&#227;o, Ci&#234;ncia e Tecnologia do
+Cear&#225; --- IFCE](https://www.ifce.edu.br)) --- there I also talked
+about KAME/IPv6 on FreeBSD and recommend the net/sysadmins to use it to
+handle routing and packet filtering. One of the official FreeBSD mirrors
+in Brazil was running thanks to IFCE --- it was [the only one in Brazil
+serving the /snapshots
 folder](https://lists.freebsd.org/pipermail/freebsd-hubs/2012-January/002431.html),
 by the way.
 
@@ -59,11 +61,11 @@ that makes [massive use of
 FreeBSD](https://www.freebsdfoundation.org/testimonial/cleverbridge).
 
 It was like yesterday when: I ran `sysinstall` for the first time and
-upgraded my machines using `cvsup`, I was subscribed to the FreeBSD
-Users Group Brazil (FUG-BR) mailing list answering more than asking, I
-saw myself giving talks related to BSD operating systems, facilitating
-tutorials and writing articles about them and getting people to know
-their features and what they are capable of. Some time in between I
+upgraded my machines using `cvsup`, I was subscribed to the [FreeBSD
+Users Group Brazil (FUG-BR)](http://fug.com.br) mailing list answering
+more than asking, I saw myself giving talks related to BSD operating systems,
+facilitating tutorials and writing articles about them and getting people
+to know their features and what they are capable of. Some time in between I
 engaged in a great effort to translate the OpenBSD FAQ and the FreeBSD
 Handbook to Portuguese, than I helped to review and update a book
 chapter about network and [Internet services powered by
