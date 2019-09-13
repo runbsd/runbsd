@@ -46,9 +46,8 @@ Machines running OpenBSD at home:
 - Ground Control System for UAV: Lenovo R400
 - Router: PC Engines APU 2
 
-_[10 Aug 2018]_
+[10 Aug 2018](https://runbsd.info/raw/people/drobban.md)
 
-[10 Aug 2018]: https://www.bsdjobs.com/raw/people/drobban.md
 [OpenBSD]: https://www.openbsd.org/
 [this talk]: https://www.reddit.com/r/openbsd/comments/8pwwma/bsdcan_theo_de_raadts_speculation_on_intel_talk/
 [@_drobban]: https://twitter.com/_drobban
