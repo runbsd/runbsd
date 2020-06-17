@@ -18,7 +18,7 @@ rm -rf "${src:?}"
 git clone "$repo" "$raw"
 (cd "$raw/.git" && git update-server-info)
 
-"/var/www/src/bin/ssg4" "$raw" "$dst" "$title" "$url" > /dev/null
+"/var/www/src/bin/ssg6" "$raw" "$dst" "$title" "$url" > /dev/null
 
 mkdir -p "$src"
 echo "${title}" > "$repo/owner"
