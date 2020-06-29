@@ -53,13 +53,6 @@ of BSD systems and to learn some system administration stuff on it
 and also I have tinkered FreeBSD kernel and written some rootkits
 for fun while reading "Designing BSD rootkits" by Joseph Kong.
 
-I introduced OpenBSD to my colleagues, college friends, and my
-girlfriend. She is not from tech industry, but she is familiar with
-Linux, OpenBSD, kernel, some security stuff, and pledge(2), just
-because I share everything I learn with her and she has no choice except
-listning.
-;)
-
 My personal blog [bsdboy.ml](https://bsdboy.ml) is running on OpenBSD
 too. It serves HTML files with httpd(8), sends and receive emails
 with OpenSMTPD.
