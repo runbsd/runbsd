@@ -8,7 +8,7 @@ then repo="$PWD"
 else repo="$PWD/.git"
 fi
 
-dst="/var/www/htdocs/$(basename "$PWD" '.git')"
+dst=/var/www/htdocs/runbsd
 raw="$dst/raw"
 src="$dst/src"
 
@@ -18,15 +18,4 @@ rm -rf "${src:?}"
 git clone "$repo" "$raw"
 (cd "$raw/.git" && git update-server-info)
 
-"/var/www/src/bin/ssg6" "$raw" "$dst" "$title" "$url" > /dev/null
-
-mkdir -p "$src"
-echo "${title}" > "$repo/owner"
-echo "${url##*//}" > "$repo/description"
-echo "${url}/raw/.git" > "$repo/url"
-(cd "$src" && stagit "$repo")
-cp -f "$src/log.html" "$src/index.html"
-cp -f "$dst/stagit/"* "$src/"
->&2 echo "[stagit] $(grep -c '"commit' "$src/log.html") commits"
-
-hostname > "$dst/hostname"
+/var/www/bin/ssg6 "$raw" "$dst" "$title" "$url" > /dev/null
