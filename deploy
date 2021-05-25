@@ -1,0 +1,139 @@
+#!/bin/sh -xe
+
+ipv4='46.23.94.50'
+ipv6='2a03:6000:6f66:640::50'
+
+# shellcheck disable=SC2016
+doas_conf='
+permit nopass setenv { ENV PS1 SSH_AUTH_SOCK PATH=$PATH HOME=$HOME } :wheel
+permit nopass keepenv root as root
+'
+
+# shellcheck disable=SC2016
+httpd_conf_with_tls='
+server "runbsd.info" {
+	alias "*.runbsd.info"
+	listen on * port 80
+	block return 301 "https://runbsd.info$REQUEST_URI"
+}
+
+server "runbsd.info" {
+	alias "*.runbsd.info"
+	listen on 127.0.0.1 port 8080
+	root "/htdocs/runbsd"
+	log style combined
+	location "/.well-known/acme-challenge/*" {
+		root "/acme"
+		request strip 2
+	}
+}
+'
+
+# shellcheck disable=SC2016
+httpd_conf='
+server "runbsd.info" {
+	alias "*.runbsd.info"
+  listen on * port 80
+  root "/htdocs/runbsd"
+  location "/.well-known/acme-challenge/*" {
+    root "/acme"
+    request strip 2
+  }
+}
+
+server "www.runbsd.info" {
+  listen on * port 80
+  block return 301 "http://runbsd.info$REQUEST_URI"
+}
+'
+
+# shellcheck disable=SC2016
+relayd_conf='
+ipv4="'"$ipv4"'"
+ipv6="'"$ipv6"'"
+
+table <local> { 127.0.0.1 }
+
+http protocol https {
+	tls ciphers "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
+        match request header append "X-Forwarded-By" value "$SERVER_ADDR:$SERVER_PORT"
+        match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
+        match request header append "X-Forwarded-Port" value "$REMOTE_PORT"
+
+	match response header set "Content-Security-Policy" value "default-src '\''none'\''; font-src '\''self'\'' runbsd.info; script-src '\''self'\'' runbsd.info; style-src '\''self'\'' runbsd.info '\''unsafe-inline'\''; img-src '\''self'\'' runbsd.info; base-uri '\''none'\''; form-action '\''self'\'' runbsd.info; frame-ancestors '\''none'\''"
+
+	match response header set "Feature-Policy" value "camera '\''none'\''; microphone '\''none'\''"
+	match response header set "Server" value "RGZ.EE"
+        # match response header set "Cache-Control"  value "max-age=31536000"
+        match response header set "Referrer-Policy" value "no-referrer"
+        match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
+        match response header set "X-Content-Type-Options" value "nosniff"
+        match response header set "X-Frame-Options" value "deny"
+        match response header set "X-XSS-Protection" value "1; mode=block"
+
+        return error
+        pass
+}
+
+relay wwwtls {
+	listen on $ipv4 port 443 tls
+	listen on $ipv6 port 443 tls
+	protocol https
+	forward to <local> port 8080
+}
+'
+acme_client_conf='
+authority letsencrypt {
+	api url "https://acme-v02.api.letsencrypt.org/directory"
+	account key "/etc/ssl/private/letsencrypt.key"
+}
+
+domain runbsd.info {
+	alternative names { runbsd.info, www.runbsd.info }
+	domain key "/etc/ssl/private/runbsd.key"
+	domain certificate "/etc/ssl/runbsd.crt"
+	domain full chain certificate "/etc/ssl/runbsd.pem"
+	sign with letsencrypt
+}
+'
+
+ssh runbsd 'set -xe
+pkg_add -u 
+pkg_add git lowdown
+pkg_delete -a
+
+mkdir -p -m 755 /var/www/htdocs/runbsd
+mkdir -p -m 700 /etc/ssl/private
+mkdir -p -m 755 /var/www/acme
+mkdir -p -m 755 /var/www/bin
+
+echo '\'"$doas_conf"\'' > /etc/doas.conf
+echo '\'"$relayd_conf"\'' > /etc/relayd.conf
+echo '\'"$acme_client_conf"\'' > /etc/acme-client.conf
+echo '\'"$httpd_conf"\'' > /etc/httpd.conf
+
+rcctl enable httpd
+httpd -n
+rcctl restart httpd
+
+acme-client -n runbsd.info
+acme-client -vF runbsd.info
+
+ln -fs /etc/ssl/private/runbsd.key /etc/ssl/private/'"$ipv4"'.key
+ln -fs /etc/ssl/private/runbsd.key "/etc/ssl/private/'"$ipv6"'.key"
+ln -fs /etc/ssl/runbsd.pem /etc/ssl/'"$ipv4"'.crt
+ln -fs /etc/ssl/runbsd.pem "/etc/ssl/'"$ipv6"'.crt"
+
+echo '\'"$httpd_conf_with_tls"\'' > /etc/httpd.conf
+httpd -n
+rcctl restart httpd
+rcctl enable relayd
+relayd -n
+rcctl restart relayd
+mkdir -p -m 755 /var/www/git
+git init --bare /var/www/git/runbsd.git
+'
+scp ssg6 runbsd:/var/www/bin/ssg6
+scp post-receive runbsd:/var/www/git/runbsd.git/hooks/post-receive
+
+git remote add runbsd runbsd:/var/www/git/runbsd.git
