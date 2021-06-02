@@ -39,6 +39,9 @@ server "runbsd.info" {
     root "/acme"
     request strip 2
   }
+  location "/*.php*" {
+    fastcgi socket "/run/php-fpm.sock"
+  }
 }
 
 server "www.runbsd.info" {
