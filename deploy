@@ -139,3 +139,5 @@ scp ssg6 runbsd:/var/www/bin/ssg6
 scp post-receive runbsd:/var/www/git/runbsd.git/hooks/post-receive
 
 git remote add runbsd runbsd:/var/www/git/runbsd.git
+
+ftp -o /var/www/htdocs/runbsd/sticker/parse.php https://high5.nl/service/runbsd_parse.php
