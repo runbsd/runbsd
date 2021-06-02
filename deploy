@@ -12,11 +12,10 @@ permit nopass keepenv root as root
 # shellcheck disable=SC2016
 httpd_conf_with_tls='
 server "runbsd.info" {
-	alias "*.runbsd.info"
-	listen on * port 80
-	block return 301 "https://runbsd.info$REQUEST_URI"
+  alias "*.runbsd.info"
+  listen on * port 80
+  block return 301 "https://runbsd.info$REQUEST_URI"
 }
-
 server "runbsd.info" {
 	alias "*.runbsd.info"
 	listen on 127.0.0.1 port 8080
@@ -35,7 +34,7 @@ server "runbsd.info" {
 # shellcheck disable=SC2016
 httpd_conf='
 server "runbsd.info" {
-	alias "*.runbsd.info"
+  alias "*.runbsd.info"
   listen on * port 80
   root "/htdocs/runbsd"
   location "/.well-known/acme-challenge/*" {
@@ -46,7 +45,6 @@ server "runbsd.info" {
     fastcgi socket "/run/php-fpm.sock"
   }
 }
-
 server "www.runbsd.info" {
   listen on * port 80
   block return 301 "http://runbsd.info$REQUEST_URI"
@@ -57,49 +55,43 @@ server "www.runbsd.info" {
 relayd_conf='
 ipv4="'"$ipv4"'"
 ipv6="'"$ipv6"'"
-
 table <local> { 127.0.0.1 }
-
 http protocol https {
-	tls ciphers "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
-        match request header append "X-Forwarded-By" value "$SERVER_ADDR:$SERVER_PORT"
-        match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
-        match request header append "X-Forwarded-Port" value "$REMOTE_PORT"
-
-	match response header set "Content-Security-Policy" value "default-src '\''none'\''; font-src '\''self'\'' runbsd.info; script-src '\''self'\'' runbsd.info; style-src '\''self'\'' runbsd.info '\''unsafe-inline'\''; img-src '\''self'\'' runbsd.info; base-uri '\''none'\''; form-action '\''self'\'' runbsd.info; frame-ancestors '\''none'\''"
-
-	match response header set "Feature-Policy" value "camera '\''none'\''; microphone '\''none'\''"
-	match response header set "Server" value "RGZ.EE"
-        # match response header set "Cache-Control"  value "max-age=31536000"
-        match response header set "Referrer-Policy" value "no-referrer"
-        match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
-        match response header set "X-Content-Type-Options" value "nosniff"
-        match response header set "X-Frame-Options" value "deny"
-        match response header set "X-XSS-Protection" value "1; mode=block"
-
-        return error
-        pass
+  tls ciphers "ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256"
+  match request header append "X-Forwarded-By" value "$SERVER_ADDR:$SERVER_PORT"
+  match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
+  match request header append "X-Forwarded-Port" value "$REMOTE_PORT"
+  match response header set "Content-Security-Policy" value "default-src '\''none'\''; font-src '\''self'\'' runbsd.info; script-src '\''self'\'' runbsd.info; style-src '\''self'\'' runbsd.info '\''unsafe-inline'\''; img-src '\''self'\'' runbsd.info; base-uri '\''none'\''; form-action '\''self'\'' runbsd.info high5.nl; frame-ancestors '\''none'\''"
+  match response header set "Feature-Policy" value "camera '\''none'\''; microphone '\''none'\''"
+  match response header set "Server" value "rgz.ee"
+  # match response header set "Cache-Control"  value "max-age=31536000"
+  match response header set "Referrer-Policy" value "no-referrer"
+  match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
+  match response header set "X-Content-Type-Options" value "nosniff"
+  match response header set "X-Frame-Options" value "deny"
+  match response header set "X-XSS-Protection" value "1; mode=block"
+  return error
+  pass
 }
 
 relay wwwtls {
-	listen on $ipv4 port 443 tls
-	listen on $ipv6 port 443 tls
-	protocol https
-	forward to <local> port 8080
+  listen on $ipv4 port 443 tls
+  listen on $ipv6 port 443 tls
+  protocol https
+  forward to <local> port 8080
 }
 '
 acme_client_conf='
 authority letsencrypt {
-	api url "https://acme-v02.api.letsencrypt.org/directory"
-	account key "/etc/ssl/private/letsencrypt.key"
+  api url "https://acme-v02.api.letsencrypt.org/directory"
+  account key "/etc/ssl/private/letsencrypt.key"
 }
-
 domain runbsd.info {
-	alternative names { runbsd.info, www.runbsd.info }
-	domain key "/etc/ssl/private/runbsd.key"
-	domain certificate "/etc/ssl/runbsd.crt"
-	domain full chain certificate "/etc/ssl/runbsd.pem"
-	sign with letsencrypt
+  alternative names { runbsd.info, www.runbsd.info }
+  domain key "/etc/ssl/private/runbsd.key"
+  domain certificate "/etc/ssl/runbsd.crt"
+  domain full chain certificate "/etc/ssl/runbsd.pem"
+  sign with letsencrypt
 }
 '
 
