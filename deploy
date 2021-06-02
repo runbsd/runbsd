@@ -102,20 +102,24 @@ domain runbsd.info {
 
 ssh runbsd 'set -xe
 pkg_add -u 
-pkg_add git lowdown
+pkg_add git lowdown php--%7.4
 pkg_delete -a
 
 mkdir -p -m 755 /var/www/htdocs/runbsd
+mkdir -p -m 755 /var/www/etc
 mkdir -p -m 700 /etc/ssl/private
 mkdir -p -m 755 /var/www/acme
 mkdir -p -m 755 /var/www/bin
+
+cp /etc/resolv.conf /var/www/etc/
+cp /bin/sh /var/www/bin
 
 echo '\'"$doas_conf"\'' > /etc/doas.conf
 echo '\'"$relayd_conf"\'' > /etc/relayd.conf
 echo '\'"$acme_client_conf"\'' > /etc/acme-client.conf
 echo '\'"$httpd_conf"\'' > /etc/httpd.conf
 
-rcctl enable httpd
+rcctl enable httpd php74_fpm
 httpd -n
 rcctl restart httpd
 
@@ -129,7 +133,7 @@ ln -fs /etc/ssl/runbsd.pem "/etc/ssl/'"$ipv6"'.crt"
 
 echo '\'"$httpd_conf_with_tls"\'' > /etc/httpd.conf
 httpd -n
-rcctl restart httpd
+rcctl restart httpd php74_fpm
 rcctl enable relayd
 relayd -n
 rcctl restart relayd
