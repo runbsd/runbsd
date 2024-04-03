@@ -3,19 +3,17 @@
 title='Run BSD'
 url='https://runbsd.info'
 
-if test -z "${PWD##*.git}"
-then repo="$PWD"
-else repo="$PWD/.git"
+if test -z "${PWD##*.git}"; then
+	repo="$PWD"
+else
+	repo="$PWD/.git"
 fi
 
 dst=/var/www/htdocs/runbsd
 raw="$dst/raw"
-src="$dst/src"
 
 rm -rf "${dst:?}/.files"
 rm -rf "${raw:?}"
-rm -rf "${src:?}"
 git clone "$repo" "$raw"
-(cd "$raw/.git" && git update-server-info)
 
-/var/www/bin/ssg6 "$raw" "$dst" "$title" "$url" > /dev/null
+/var/www/bin/ssg6 "$raw" "$dst" "$title" "$url"
