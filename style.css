@@ -13,7 +13,7 @@ pre { font-size: 15px; overflow-x: auto; color: #333; }
 a { background-color: transparent; }
 textarea, input, a, body, code, div, form, h1, h2, h3, html, li, ol, p, pre, ul { box-sizing: border-box; }
 button, input, optgroup, select, textarea { font-family: inherit; font-size: 1rem; line-height: 1.15; margin: 0; }
-select, button, input { overflow: visible; -webkit-appearance: none; -moz-appearance: none; }
+select, button, input { overflow: visible; appearance: none; -webkit-appearance: none; -moz-appearance: none; }
 img { border-style: none; }
 
 .footnotes { font-size: .75rem; }
@@ -27,7 +27,7 @@ img { border-style: none; }
 .bg-white { background-color: #fff; }
 .black { color: #000; }
 .center { margin-right: auto; margin-left: auto; }
-.cf { *zoom: 1; }
+.cf { zoom: 1; }
 .cf:after { clear: both; }
 .cf:before, .cf:after { content: " "; display: table; }
 .code, pre, code { font-family: Consolas, monaco, monospace; }
